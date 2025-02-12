@@ -1,6 +1,7 @@
 package com.example.demo.models.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class Student {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @Email
     private String email;
 
     @Column(nullable = false)
@@ -61,7 +63,7 @@ public class Student {
 //                ", name='" + name + '\'' +
 //                ", age=" + age +
 //                ", birthday=" + birthday +
-//                ", gender=" + gender + '\'' +
+//                ", gender=" + gender +
 //                '}';
 //    }
 }

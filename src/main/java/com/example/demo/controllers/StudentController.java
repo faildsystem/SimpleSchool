@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Dtos.CreateStudentDto;
+import com.example.demo.models.Dtos.UpdateStudentDto;
 import com.example.demo.models.domain.Student;
 import com.example.demo.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class StudentController {
         return studentService.createStudent(student);
     }
 
-    @PutMapping(path = "update")
-    public Student updateStudent(@RequestBody Student student){
-        return studentService.updateStudent(student);
+    @PutMapping(path = "update/{studentId}")
+    public Student updateStudent(@RequestBody UpdateStudentDto updateStudentDto, @PathVariable Long studentId){
+        return studentService.updateStudent(studentId, updateStudentDto);
     }
 
     @DeleteMapping(path = "delete/{studentId}")

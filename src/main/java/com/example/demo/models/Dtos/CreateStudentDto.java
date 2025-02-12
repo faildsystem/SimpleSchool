@@ -14,10 +14,6 @@ public class CreateStudentDto {
 
     private LocalDate birthday;
 
-    public enum Gender {
-        MALE, FEMALE
-    }
-
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private Student.Gender gender;
 }
