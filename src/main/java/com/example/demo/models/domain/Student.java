@@ -1,5 +1,6 @@
 package com.example.demo.models.domain;
 
+import com.example.demo.helpers.Enums;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -32,19 +33,14 @@ public class Student {
     private Integer age;
 
     @Column(nullable = false)
-
     private LocalDate birthday;
-
-    public enum Gender {
-        MALE, FEMALE
-    }
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Gender gender;
+    private Enums.Gender gender;
 
 
-    public Student(String name, String email, LocalDate birthday, Gender gender) {
+    public Student(String name, String email, LocalDate birthday, Enums.Gender gender) {
         this.name = name;
         this.email = email;
         this.birthday = birthday;

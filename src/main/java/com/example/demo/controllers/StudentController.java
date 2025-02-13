@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Dtos.CreateStudentDto;
-import com.example.demo.models.Dtos.UpdateStudentDto;
+import com.example.demo.models.Dtos.student.CreateStudentDto;
+import com.example.demo.models.Dtos.student.UpdateStudentDto;
 import com.example.demo.models.domain.Student;
 import com.example.demo.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class StudentController {
     }
 
     @PostMapping(path = "create")
-    public Student createStudent(@RequestBody Student student){
-        return studentService.createStudent(student);
+    public Student createStudent(@RequestBody CreateStudentDto createStudentDto){
+        return studentService.createStudent(createStudentDto);
     }
 
     @PutMapping(path = "update/{studentId}")

@@ -1,13 +1,16 @@
-package com.example.demo.models.Dtos;
+package com.example.demo.models.Dtos.student;
 
-import com.example.demo.models.domain.Student;
+import com.example.demo.helpers.Enums;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
-public class CreateStudentDto {
-
+@Getter
+@Setter
+public class UpdateStudentDto {
     private String email;
 
     private String name;
@@ -15,5 +18,5 @@ public class CreateStudentDto {
     private LocalDate birthday;
 
     @Enumerated(EnumType.STRING)
-    private Student.Gender gender;
+    private Enums.Gender gender;
 }

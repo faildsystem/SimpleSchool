@@ -1,11 +1,11 @@
 package com.example.demo.services;
 
-import com.example.demo.models.Dtos.CreateStudentDto;
-import com.example.demo.models.Dtos.UpdateStudentDto;
+import com.example.demo.helpers.Enums;
+import com.example.demo.models.Dtos.student.CreateStudentDto;
+import com.example.demo.models.Dtos.student.UpdateStudentDto;
 import com.example.demo.models.domain.Student;
 import com.example.demo.repositories.StudentRepository;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +28,21 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Student createStudent(Student student){
+    public Student createStudent(CreateStudentDto createStudentDto){
+        String email = createStudentDto.getEmail();
 
+        Optional<Student> optionalStudent = studentRepository.findStudentByEmail(email);
+
+        if (optionalStudent.isPresent()){
+            throw new RuntimeException("Student with the same " + email + " exists");
+        }
+
+        String name = createStudentDto.getName();
+        LocalDate birthday = createStudentDto.getBirthday();
+        Enums.Gender gender = createStudentDto.getGender();
+
+        Student student = new Student(name, email, birthday, gender);
+        
         return studentRepository.save(student);
     }
 
@@ -49,7 +62,7 @@ public class StudentService {
 
         String name = updateStudentDto.getName();
         LocalDate birthday = updateStudentDto.getBirthday();
-        Student.Gender gender = updateStudentDto.getGender();
+        Enums.Gender gender = updateStudentDto.getGender();
 
         if (name != null && !name.isEmpty() && !Objects.equals(name, existingStudent.getName())){
             existingStudent.setName(name);
