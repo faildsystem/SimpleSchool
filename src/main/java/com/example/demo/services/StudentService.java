@@ -40,10 +40,11 @@ public class StudentService {
         }
 
         String name = createStudentDto.getName();
+        String password = createStudentDto.getPassword();
         LocalDate birthday = createStudentDto.getBirthday();
         Enums.Gender gender = createStudentDto.getGender();
 
-        Student student = new Student(name, email, birthday, gender);
+        Student student = new Student(name, email, password, birthday, gender);
         
         return studentRepository.save(student);
     }

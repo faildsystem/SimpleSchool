@@ -13,6 +13,8 @@ public class CreateStudentDto {
 
     private String email;
 
+    private String password;
+
     private String name;
 
     private LocalDate birthday;

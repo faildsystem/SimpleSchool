@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,6 +27,9 @@ public class Student {
     @Column(nullable = false, unique = true)
     @Email
     private String email;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(nullable = false)
     private String name;
@@ -48,9 +52,19 @@ public class Student {
     )
     private List<Course> courses;
 
-    public Student(String name, String email, LocalDate birthday, Enums.Gender gender) {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private List<Role> roles = new ArrayList<>();
+
+
+    public Student(String name, String email, String password, LocalDate birthday, Enums.Gender gender) {
         this.name = name;
         this.email = email;
+        this.password = password;
         this.birthday = birthday;
         this.gender = gender;
     }
