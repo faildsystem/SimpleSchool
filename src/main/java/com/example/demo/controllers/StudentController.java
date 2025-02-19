@@ -40,12 +40,12 @@ public class StudentController {
         studentService.deleteStudent(studentId);
     }
 
-    @PostMapping("/{studentId}/courses/{courseId}")
+    @PostMapping("/{studentId}/enroll/{courseId}")
     public Student enrollStudentInCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
         return studentService.enrollCourse(studentId, courseId);
     }
 
-    @PostMapping("/{studentId}/courses/{courseId}")
+    @PostMapping("/{studentId}/withdraw/{courseId}")
     public Student withdrawCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
         return studentService.withdrawCourse(studentId, courseId);
     }
