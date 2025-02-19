@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Entity
 @Table(name = "students")
@@ -39,6 +40,13 @@ public class Student {
     @Column(nullable = false)
     private Enums.Gender gender;
 
+    @ManyToMany
+    @JoinTable(
+            name = "student_course",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses;
 
     public Student(String name, String email, LocalDate birthday, Enums.Gender gender) {
         this.name = name;
@@ -50,16 +58,4 @@ public class Student {
     public Integer getAge() {
         return (birthday != null) ? Period.between(this.birthday, LocalDate.now()).getYears() : null;
     }
-
-//    @Override
-//    public String toString() {
-//        return "Student{" +
-//                "id=" + id +
-//                ", email='" + email + '\'' +
-//                ", name='" + name + '\'' +
-//                ", age=" + age +
-//                ", birthday=" + birthday +
-//                ", gender=" + gender +
-//                '}';
-//    }
 }

@@ -1,7 +1,10 @@
 package com.example.demo.models.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "courses")
@@ -23,6 +26,9 @@ public class Course {
     @Column(nullable = true)
     private String description;
 
+    @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
+    private List<Student> students;
 
     public Course(String name, String description) {
         this.name = name;

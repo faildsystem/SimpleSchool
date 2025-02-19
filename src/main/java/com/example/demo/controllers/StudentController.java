@@ -20,23 +20,33 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping(path = "all")
+    @GetMapping
     public List<Student> getStudents(){
         return studentService.getStudents();
     }
 
-    @PostMapping(path = "create")
+    @PostMapping
     public Student createStudent(@RequestBody CreateStudentDto createStudentDto){
         return studentService.createStudent(createStudentDto);
     }
 
-    @PutMapping(path = "update/{studentId}")
+    @PutMapping(path = "{studentId}")
     public Student updateStudent(@RequestBody UpdateStudentDto updateStudentDto, @PathVariable Long studentId){
         return studentService.updateStudent(studentId, updateStudentDto);
     }
 
-    @DeleteMapping(path = "delete/{studentId}")
+    @DeleteMapping(path = "{studentId}")
     public void deleteStudent(@PathVariable Long studentId){
         studentService.deleteStudent(studentId);
+    }
+
+    @PostMapping("/{studentId}/courses/{courseId}")
+    public Student enrollStudentInCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
+        return studentService.enrollCourse(studentId, courseId);
+    }
+
+    @PostMapping("/{studentId}/courses/{courseId}")
+    public Student withdrawCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
+        return studentService.withdrawCourse(studentId, courseId);
     }
 }
