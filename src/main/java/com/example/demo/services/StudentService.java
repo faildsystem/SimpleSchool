@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.helpers.Enums;
-import com.example.demo.models.Dtos.student.CreateStudentDto;
+import com.example.demo.models.Dtos.auth.RegisterDto;
 import com.example.demo.models.Dtos.student.UpdateStudentDto;
 import com.example.demo.models.domain.Course;
 import com.example.demo.models.domain.Student;
@@ -30,8 +30,8 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Student createStudent(CreateStudentDto createStudentDto){
-        String email = createStudentDto.getEmail();
+    public Student createStudent(RegisterDto registerDto){
+        String email = registerDto.getEmail();
 
         Optional<Student> optionalStudent = studentRepository.findStudentByEmail(email);
 
@@ -39,12 +39,13 @@ public class StudentService {
             throw new RuntimeException("Student with the same " + email + " exists");
         }
 
-        String name = createStudentDto.getName();
-        String password = createStudentDto.getPassword();
-        LocalDate birthday = createStudentDto.getBirthday();
-        Enums.Gender gender = createStudentDto.getGender();
+        String name = registerDto.getName();
+        String username = registerDto.getUsername();
+        String password = registerDto.getPassword();
+        LocalDate birthday = registerDto.getBirthday();
+        Enums.Gender gender = registerDto.getGender();
 
-        Student student = new Student(name, email, password, birthday, gender);
+        Student student = new Student(name, email, username, password, birthday, gender);
         
         return studentRepository.save(student);
     }

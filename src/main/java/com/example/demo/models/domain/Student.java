@@ -4,6 +4,7 @@ import com.example.demo.helpers.Enums;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -27,6 +28,9 @@ public class Student {
     @Column(nullable = false, unique = true)
     @Email
     private String email;
+
+    @Column(nullable = false, unique = true)
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -61,9 +65,10 @@ public class Student {
     private List<Role> roles = new ArrayList<>();
 
 
-    public Student(String name, String email, String password, LocalDate birthday, Enums.Gender gender) {
+    public Student(String name, String email, String username, String password, LocalDate birthday, Enums.Gender gender) {
         this.name = name;
         this.email = email;
+        this.username = username;
         this.password = password;
         this.birthday = birthday;
         this.gender = gender;

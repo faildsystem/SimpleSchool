@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Dtos.student.CreateStudentDto;
+import com.example.demo.models.Dtos.auth.RegisterDto;
 import com.example.demo.models.Dtos.student.UpdateStudentDto;
 import com.example.demo.models.domain.Student;
 import com.example.demo.services.StudentService;
@@ -26,8 +26,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public Student createStudent(@RequestBody CreateStudentDto createStudentDto){
-        return studentService.createStudent(createStudentDto);
+    public Student createStudent(@RequestBody RegisterDto registerDto){
+        return studentService.createStudent(registerDto);
     }
 
     @PutMapping(path = "{studentId}")

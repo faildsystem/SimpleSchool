@@ -1,4 +1,4 @@
-package com.example.demo.models.Dtos.student;
+package com.example.demo.models.Dtos.auth;
 
 import com.example.demo.helpers.Enums;
 import jakarta.persistence.EnumType;
@@ -9,10 +9,12 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class CreateStudentDto {
+public class RegisterDto {
 
     private String email;
 
+    private String username;
+    
     private String password;
 
     private String name;
